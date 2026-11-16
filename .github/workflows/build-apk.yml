@@ -42,13 +42,12 @@ jobs:
           echo "Found Android project at: $PROJECT_DIR"
           echo "project_dir=$PROJECT_DIR" >> $GITHUB_OUTPUT
 
-      - name: Grant Execute Permission for Gradlew
-        run: |
-          chmod +x "${{ steps.locate.outputs.project_dir }}/gradlew"
-
-      - name: Build Debug APK with Wrapper
+      - name: Generate Gradle Wrapper & Build APK
         run: |
           cd "${{ steps.locate.outputs.project_dir }}"
+          # Generate a fresh gradlew wrapper since it wasn't in the project upload
+          gradle wrapper --gradle-version 8.5
+          chmod +x gradlew
           ./gradlew assembleDebug
 
       - name: Upload APK Artifact
