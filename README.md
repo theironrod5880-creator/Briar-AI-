@@ -1,1 +1,1 @@
-[![Build Android APK](https://github.com/theironrod5880-creator/Briar-AI-/actions/workflows/build-apk.yml/badge.svg)](https://github.com/theironrod5880-creator/Briar-AI-/actions/workflows/build-apk.yml) at the top of your README.md file.)
+(https://github.com/theironrod5880-creator/Briar-AI-/actions/workflows/build-apk.yml/badge.svg)](https://github.com/theironrod5880-creator/Briar-AI-/actions/workflows/build-apk.yml) at the top of your README.md file.)
