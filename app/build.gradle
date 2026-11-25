@@ -1,0 +1,33 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.bryars.ai'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'app.bryars.ai'
+        minSdk 24
+        targetSdk 34
+        versionCode 8
+        versionName '0.5.1'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // MainActivity uses androidx.webkit.WebViewAssetLoader to serve the web app.
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'androidx.core:core:1.13.1'
+}

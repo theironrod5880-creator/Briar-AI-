@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Music — Born In The Mud</title>
+<style>
+  /* 2026-11-21 (0.5.0 merge): the man's own songs, bundled in the app so they
+     play offline. No streaming, nothing leaves the device. */
+  body { margin: 0; background: #0b0e14; color: #e8e8e8; font-family: system-ui, sans-serif; padding: 16px; }
+  h1 { font-size: 1.3em; margin: 0 0 4px 0; }
+  .sub { color: #9aa3b2; font-size: 0.85em; margin: 0 0 20px 0; }
+  .track { background: #141926; border: 1px solid #26304a; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+  .track b { display: block; font-size: 1.05em; }
+  .track span { color: #9aa3b2; font-size: 0.85em; }
+  audio { width: 100%; margin-top: 10px; }
+  .note { color: #9aa3b2; font-size: 0.8em; margin-top: 20px; }
+</style>
+</head>
+<body>
+<h1>Music — Born In The Mud</h1>
+<p class="sub">Your own songs, from the album “Born In The Mud” and singles. Plays offline, inside the app.</p>
+
+<div class="track">
+  <b>Walk in the Stride</b><span>The Source of My Stride · 3:28 · series theme</span>
+  <audio controls preload="metadata" src="the-source-of-my-stride.mp3"></audio>
+</div>
+
+<div class="track">
+  <b>Wheels in the Sky</b><span>4:18</span>
+  <audio controls preload="metadata" src="wheels-in-the-sky.mp3"></audio>
+</div>
+
+<div class="track">
+  <b>Outlaw for the Almighty</b><span>4:36</span>
+  <audio controls preload="metadata" src="outlaw-for-the-almighty.mp3"></audio>
+</div>
+
+<div class="track">
+  <b>Let Your Kingdom Come</b><span>3:57 · single</span>
+  <audio controls preload="metadata" src="let-your-kingdom-come.mp3"></audio>
+</div>
+
+<p class="note">Walk in the Stride opens and closes the episodes. The rest play between the narrator and the Source.</p>
+</body>
+</html>

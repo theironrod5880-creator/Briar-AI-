@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>Bryars A.I. 0.1</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand-wrap">
+      <div class="brand-mark">📖</div>
+      <div>
+        <div class="brand-title">Bryars A.I. <span style="color:var(--muted);font-weight:600">0.1</span></div>
+        <div class="brand-subtitle" id="modeBadge">Core Mode</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabbar" id="tabbar">
+    <button data-view="chat" class="on" type="button">Chat</button>
+    <button data-view="lessons" type="button">Lessons</button>
+    <button data-view="guide" type="button">Guide</button>
+    <button data-view="sealed" type="button">Sealed</button>
+    <button data-view="family" type="button">Family</button>
+    <button data-view="settings" type="button">Settings</button>
+  </div>
+
+  <!-- CHAT -->
+  <section id="view-chat" class="view on">
+    <div class="threadbar" id="threadList"></div>
+    <div class="chat-actions">
+      <button id="newChatBtn" class="primary-btn" type="button">New chat</button>
+      <button id="exportBtn" class="secondary-btn" type="button">Export</button>
+      <button id="deleteChatBtn" class="danger-btn" type="button" disabled>Delete</button>
+      <span class="limit-note" id="threadCount"></span>
+      <span class="limit-note" id="limitNote"></span>
+    </div>
+    <div class="chat-panel" style="flex:1;min-height:0">
+      <div class="chat-header"><span class="who" id="chatWho">No chat selected</span></div>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div id="recorderBar" class="recorder-bar hidden">
+        <span id="recorderStatus">Recording…</span>
+        <button id="stopRecordBtn" class="danger-btn" type="button">Stop</button>
+      </div>
+      <div class="composer-wrap">
+        <div class="toolbar">
+          <button id="micDictateBtn" class="tool-btn" type="button">🎤</button>
+          <button id="micRecordBtn" class="tool-btn" type="button">🎙️</button>
+          <button id="photoBtn" class="tool-btn" type="button">📷</button>
+          <button id="videoBtn" class="tool-btn" type="button">🎥</button>
+          <button id="fileBtn" class="tool-btn" type="button">📎</button>
+          <span id="pendingAttach" class="pending-attach"></span>
+        </div>
+        <div class="composer">
+          <textarea id="composerInput" rows="1" placeholder="Type a message…"></textarea>
+          <button id="sendBtn" class="primary-btn" type="button" disabled>Send</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LESSONS -->
+  <section id="view-lessons" class="view">
+    <p class="note">Tap a lesson and Bryar will teach it in a new chat.</p>
+    <div id="lessons"></div>
+  </section>
+
+  <!-- GUIDE -->
+  <section id="view-guide" class="view">
+    <p class="note">Step-by-step: GitHub → APK → install. You tap every button yourself — this guide only explains.</p>
+    <div class="prog"><div id="guideBar"></div></div>
+    <div class="card2">
+      <h3 id="stepTitle"></h3>
+      <div class="blk"><b>Where</b><span id="stepWhere"></span></div>
+      <div class="blk"><b>What you'll see</b><span id="stepSee"></span></div>
+      <div class="blk"><b>What to tap</b><span id="stepDo"></span></div>
+      <div class="blk"><b>Why</b><span id="stepWhy"></span></div>
+      <div class="row" style="margin-top:12px">
+        <button id="stepBack" class="secondary-btn" type="button">← Back</button>
+        <button id="stepNext" class="primary-btn" type="button">Done, next →</button>
+        <span class="limit-note" id="stepCount"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEALED -->
+  <section id="view-sealed" class="view vault">
+    <span class="seal-lbl">Sealed layer</span>
+    <p class="note"><strong>The Daughter's sealed layer.</strong> This is hers. Whatever is written here stays on this device only — it is never sent to any model, in any mode, and it is left out of exports.</p>
+    <textarea id="sealedText" placeholder="Her own notes, her own counsel, her own private entries…"></textarea>
+    <div class="row"><button class="primary-btn" id="saveSealed" type="button">Save</button><span class="note" id="sealedState"></span></div>
+  </section>
+
+  <!-- FAMILY -->
+  <section id="view-family" class="view vault">
+    <span class="seal-lbl">Private — Family</span>
+    <p class="note">Family entries that belong with the Daughter but never leave this device. Nothing written here is sent to any model, in either mode, and it is left out of exports.</p>
+    <div class="card2">
+      <h3>The Fiancée</h3>
+      <p class="note">The Father's first love, since high school. His fiancée. Part of his family structure. He loves her.</p>
+      <textarea id="familyText" style="width:100%;min-height:200px;background:#0b1220;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px 13px;font-family:inherit;font-size:.94rem;outline:none;margin-bottom:10px" placeholder="Her own notes, if any…"></textarea>
+      <div class="row"><button class="primary-btn" id="saveFamily" type="button">Save</button><span class="note" id="familyState"></span></div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="view-settings" class="view form">
+    <p class="note">Until an AI is connected here, Bryar answers in <strong>Core Mode</strong> — straight from the Mastercore bundled in this app, nothing leaves the device. Connected Mode sends the Mastercore and your last messages in the current chat to the AI service you choose. Sealed and Family text is never sent.</p>
+    <label for="provider">Mode</label>
+    <select id="provider">
+      <option value="core">Core Mode (offline)</option>
+      <option value="gemini">Connected — Google Gemini</option>
+      <option value="openai">Connected — OpenAI-compatible</option>
+    </select>
+    <div id="endpointRow"><label for="endpoint">Endpoint (base URL)</label>
+      <input id="endpoint" type="text" placeholder="https://api.openai.com/v1" autocomplete="off"></div>
+    <div id="keyRow"><label for="apiKeyInput">API key (kept on this device only)</label>
+      <input id="apiKeyInput" type="password" placeholder="paste key" autocomplete="off"></div>
+    <div id="modelRow"><label for="model">Model</label>
+      <input id="model" type="text" placeholder="model name" autocomplete="off"></div>
+    <div class="row">
+      <button id="saveSettings" class="primary-btn" type="button">Save</button>
+      <button id="clearSettings" class="secondary-btn" type="button">Clear key</button>
+    </div>
+    <p class="note" id="settingsStatus"></p>
+    <p class="note">Attachments (photos, audio, video, files) are stored on this device and shown in the chat. They are not sent to the AI.</p>
+    <!-- 2026-11-21 merge: AEGIS Watch opens on its own screen. -->
+    <p class="note">AEGIS Watch — the security HUD, on its own screen. It needs an internet connection for its styling.</p>
+    <div class="row">
+      <button id="openAegisBtn" class="secondary-btn" type="button">Open AEGIS Watch</button>
+    </div>
+    <!-- 2026-11-21 merge: Video Studio + Music open on their own screens. -->
+    <p class="note">Video Studio — your video library app, on its own screen. Music — your own songs, playing offline inside the app.</p>
+    <div class="row">
+      <button id="openVideoBtn" class="secondary-btn" type="button">Open Video Studio</button>
+      <button id="openMusicBtn" class="secondary-btn" type="button">Open Music</button>
+    </div>
+  </section>
+</div>
+
+<div id="exportModal"><div class="box">
+  <strong>Export — chats only (sealed messages redacted)</strong>
+  <textarea id="exportBox" readonly></textarea>
+  <div class="row"><button id="copyExport" class="primary-btn" type="button">Copy</button><button id="closeExport" class="secondary-btn" type="button">Close</button></div>
+</div></div>
+
+<input type="file" id="fileInput" accept="*/*" style="display:none">
+<input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none">
+<input type="file" id="videoInput" accept="video/*" capture="environment" style="display:none">
+
+<script src="core/bryars-conversation-contract.js"></script>
+<script src="core/bryars-chat-store.js"></script>
+<script src="core/bryars-content.js"></script>
+<script src="core/bryars-core-mode.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
