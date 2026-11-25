@@ -46,7 +46,7 @@ jobs:
         run: |
           cd "${{ steps.locate.outputs.project_dir }}"
           # Generate a fresh gradlew wrapper since it wasn't in the project upload
-          gradle wrapper --gradle-version 8.5
+          gradle wrapper --gradle-version 8.9
           chmod +x gradlew
           ./gradlew assembleDebug
 
